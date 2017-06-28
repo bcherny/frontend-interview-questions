@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "tdd": "ava *.js -w",
-    "test": "ava *.js"
+    "tdd": "ava **/*.js -w",
+    "test": "ava **/*.js"
   },
   "repository": {
     "type": "git",

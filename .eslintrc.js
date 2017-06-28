@@ -5,6 +5,6 @@ module.exports = {
     "promise"
   ],
   "rules": {
-    "first": false
+    "import/first": false
   }
 }

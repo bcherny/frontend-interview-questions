@@ -1,22 +1,33 @@
 /// solution
 
 function isBalanced(string) {
-  let count = 0
+  let countClosing = 0
+  let countOpening = 0
   for (let letter of string) {
     if (letter === '{') {
-      count++
+      countOpening++
     }
     if (letter === '}') {
-      count--
+      countClosing++
+
+      // if a closing bracket doesn't have a matching
+      // opening bracket, we can return early.
+      if (countOpening < countClosing) {
+        return false
+      }
+
     }
   }
-  return count === 0
+  return countOpening === countClosing
 }
 
 /// tests
 
 import { test } from 'ava'
 
+test(t => t.is(isBalanced('}{'), false))
+test(t => t.is(isBalanced('{{}'), false))
+test(t => t.is(isBalanced('{}{}'), true))
 test(t => t.is(isBalanced('foo { bar { baz } boo }'), true))
 test(t => t.is(isBalanced('foo { bar { baz }'), false))
 test(t => t.is(isBalanced('foo { bar } }'), false))

@@ -1,24 +1,23 @@
 /// solution
 
 function isBalanced(string) {
-  let countClosing = 0
-  let countOpening = 0
+  let count = 0
   for (let letter of string) {
     if (letter === '{') {
-      countOpening++
+      count++
     }
     if (letter === '}') {
-      countClosing++
+      count--
 
       // if a closing bracket doesn't have a matching
-      // opening bracket, we can return early.
-      if (countOpening < countClosing) {
+      // opening bracket, we should return early.
+      if (count < 0) {
         return false
       }
 
     }
   }
-  return countOpening === countClosing
+  return count === 0
 }
 
 /// tests

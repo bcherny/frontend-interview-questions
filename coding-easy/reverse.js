@@ -10,9 +10,15 @@ function reverse(string) {
   return result
 }
 
+/// solution 2
+const reverse2 = string => string.split('').reverse().join('')
+
 /// tests
 
 import { test } from 'ava'
 
 test(t => t.is(reverse(''), ''))
 test(t => t.is(reverse('abcdef'), 'fedcba'))
+
+test(t => t.is(reverse2(''), ''))
+test(t => t.is(reverse2('abcdef'), 'fedcba'))

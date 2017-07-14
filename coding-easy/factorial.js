@@ -4,7 +4,7 @@ function tailFactorial(n, total) {
   switch (n) {
     case 0: return 1
     case 1: return 1
-    default: return tailFactorial(n-1, , n * total)
+    default: return tailFactorial(n-1, n * total)
   }
 }
 

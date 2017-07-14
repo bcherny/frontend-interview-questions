@@ -1,11 +1,15 @@
 /// solution
 
-function factorial(n) {
+function tailFactorial(n, total) {
   switch (n) {
     case 0: return 1
-    case 1: return 1
-    default: return n * factorial(n - 1)
+    case 1: return total
+    default: return tailFactorial(n-1, n * total)
   }
+}
+
+function factorial(n) {
+  return tailFactorial(n, 1)
 }
 
 /// tests

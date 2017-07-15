@@ -21,3 +21,18 @@ test(async t => {
   t.deepEqual(await seq([a, b, c]), ['a', 'b', 'c'])
   t.deepEqual(await seq([a, c, b]), ['a', 'c', 'b'])
 })
+
+test(async t => {
+
+  let delay = 100;
+  
+  let resolved = new Promise(res => setTimeout(res, delay))
+  let rejected = Promise.reject()
+
+  let start = Date.now()
+  try {
+    await seq([resolved, rejected])
+  } catch(e) {
+    t.true(Date.now() - start >= delay)
+  }
+})

@@ -1,13 +1,11 @@
 /// solution
 
-async function seq([promise, ...promises]) {
-  if (!promise) {
-    return []
-  }
-  return [
-    await promise,
-    ...await seq(promises)
-  ]
+async function seq(funcs) {
+    let res;
+    for (let f of funcs) {
+        res = await f(res);
+    }
+    return res;
 }
 
 /// tests
@@ -15,9 +13,10 @@ async function seq([promise, ...promises]) {
 import { test } from 'ava'
 
 test(async t => {
-  let a = Promise.resolve('a')
-  let b = Promise.resolve('b')
-  let c = Promise.resolve('c')
-  t.deepEqual(await seq([a, b, c]), ['a', 'b', 'c'])
-  t.deepEqual(await seq([a, c, b]), ['a', 'c', 'b'])
+    let a = async () => ['a']
+    let b = async (accum) => accum.concat(['b'])
+    let c = async (accum) => accum.concat(['c'])
+
+    t.deepEqual(await seq([a, b, c]), ['a', 'b', 'c'])
+    t.deepEqual(await seq([a, c, b]), ['a', 'c', 'b'])
 })

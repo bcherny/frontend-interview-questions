@@ -1,10 +1,10 @@
 /// solution
 
-let reduceAsync = async (as, fn, init) => {
-  for (let a of as) {
-    init = fn(init, await a())
+let reduceAsync = async (array, fn, value) => {
+  for (let a of array) {
+    value = fn(value, await a())
   }
-  return init
+  return value
 }
 
 /// tests

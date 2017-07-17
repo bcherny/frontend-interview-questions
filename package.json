@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
+    "pretest": "npm run lint",
     "tdd": "ava **/*.js -w",
     "test": "ava **/*.js"
   },

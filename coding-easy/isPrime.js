@@ -14,7 +14,7 @@ function isPrime(n) {
     return false
   }
   for (let i = 2; i < Math.ceil(Math.sqrt(n)) + 1; i++) {
-    if (n % i === 0) {
+    if (n % i === 0 && i !== n) {
       return false
     }
   }
@@ -27,6 +27,7 @@ import { test } from 'ava'
 
 test(t => t.is(isPrime(0), false))
 test(t => t.is(isPrime(1), false))
+test(t => t.is(isPrime(2), true))
 test(t => t.is(isPrime(9), false))
 test(t => t.is(isPrime(17), true))
 test(t => t.is(isPrime(25), false))

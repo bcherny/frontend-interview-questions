@@ -1,23 +1,26 @@
 /// solution
+//  got rid of the spread operator
+function assignDeep(target, source) {
+//  got rid of the first loop here
+  for (let key in source) {
+    if (isObject(source[key])) {
+      if (!isObject(target[key])) {
+        target[key] = {}
 
-function assignDeep(target, ...sources) {
-  for (let source of sources) {
-    for (let key in source) {
-      if (isObject(source[key])) {
-        if (!isObject(target[key])) {
-          target[key] = {}
-        }
-        assignDeep(target[key], source[key])
-      } else {
-        target[key] = source[key]
       }
+      assignDeep(target[key], source[key])
+    } else {
+
+      target[key] = source[key]
     }
   }
   return target
-}
 
-function isObject(a) {
-  return typeof a === 'object' && a !== null
+  function isObject(val) {
+
+    return typeof val === 'object' && val != null
+  }
+
 }
 
 /// tests

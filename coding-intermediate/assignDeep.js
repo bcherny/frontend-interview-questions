@@ -1,25 +1,23 @@
 /// solution
 
-function assignDeep(target,source){
-  for(let key in source){
-    if(isObject(source[key])){
-      if(!isObject(target[key])){
-        target[key]={}
+function assignDeep(target, source) {
+  for (let key in source) {
+    if (isObject(source[key])) {
+      if (!isObject(target[key])) {
+        target[key] = {}
 
-          }
-        assignDeep(target[key],source[key]);
+      }
+      assignDeep(target[key], source[key])
+    } else {
 
-          }else{
+      target[key] = source[key]
+    }
+  }
+  return target
 
-            target[key]=source[key];
-              }
+  function isObject(val) {
 
-           }
-      return target
-
-  function isObject(val){
-
-    return typeof val==='object' && typeof val != null;
+    return typeof val === 'object' && val != null
   }
 
 }

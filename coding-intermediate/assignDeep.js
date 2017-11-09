@@ -1,6 +1,7 @@
 /// solution
-
+//  got rid of the spread operator
 function assignDeep(target, source) {
+//  got rid of the first loop here
   for (let key in source) {
     if (isObject(source[key])) {
       if (!isObject(target[key])) {

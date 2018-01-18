@@ -11,9 +11,7 @@ function intersection(left, right) {
   // loop, which would take up to O(N * log(N)) time.
   //
   // "new Set()" doesn't allow duplicates
-  const seen = left.reduce((seen, num) => {
-    return seen.add(num)
-  }, new Set())
+  const seen = new Set(left)
 
   const result = right.reduce((result, num) => {
     if (seen.has(num)) {

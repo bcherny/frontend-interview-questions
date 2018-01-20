@@ -29,3 +29,4 @@ import { test } from 'ava'
 
 test(t => t.deepEqual(intersection([1, 5, 4, 2], [8, 91, 4, 1, 3]), [4, 1]))
 test(t => t.deepEqual(intersection([1, 5, 4, 2], [7, 12]), []))
+test(t => t.deepEqual(intersection([1, 5, 1, 10], [5, 1, 5, 12]), [5, 1]))

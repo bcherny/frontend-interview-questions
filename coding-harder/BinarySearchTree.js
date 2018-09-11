@@ -99,3 +99,12 @@ test('BinarySearchTree', t => {
   tree.remove(3)
   t.is(tree.size(), 4)
 })
+
+test('BinarySearchTree#get', t => {
+  let tree = new BinarySearchTree
+  t.is(tree.get(42), null)
+  tree.add(42, 43)
+  t.is(tree.get(42), 42)
+  t.is(tree.get(43), 43)
+  t.is(tree.get(44), null)
+})

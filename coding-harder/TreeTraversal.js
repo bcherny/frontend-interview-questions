@@ -80,54 +80,46 @@ class BinarySearchTree {
     return _size(this.root)
   }
 
-  inorder() {
-    let queue = new Queue()
+  inorder(fn) {
     function _inorder(node) {
       if (node === null) return
       _inorder(node.left)
-      queue.enqueue(node)
+      fn(node)
       _inorder(node.right)
     }
     _inorder(this.root)
-    return queue
   }
 
-  preorder() {
-    let queue = new Queue()
+  preorder(fn) {
     function _preorder(node) {
       if (node === null) return
-      queue.enqueue(node)
+      fn(node)
       _preorder(node.left)
       _preorder(node.right)
     }
     _preorder(this.root)
-    return queue
   }
 
-  postorder() {
-    let queue = new Queue()
+  postorder(fn) {
     function _postorder(node) {
       if (node === null) return
       _postorder(node.left)
       _postorder(node.right)
-      queue.enqueue(node)
+      fn(node)
     }
     _postorder(this.root)
-    return queue
   }
 
-  bfs() {
-    if (this.root === null) return new Queue()
+  bfs(fn) {
+    if (this.root === null) return
     let queue = new Queue()
-    let nodes = new Queue()
     queue.enqueue(this.root)
     while (!queue.isEmpty()) {
       let node = queue.dequeue()
-      nodes.enqueue(node)
+      fn(node)
       if (node.left !== null) queue.enqueue(node.left)
       if (node.right !== null) queue.enqueue(node.right)
     }
-    return nodes
   }
 }
 
@@ -151,15 +143,6 @@ class Queue {
   enqueue(item) { this.data.unshift(item) }
   dequeue() { return this.data.pop() }
   isEmpty() { return this.data.length === 0 }
-
-  [Symbol.iterator]() {
-    let idx = this.data.length - 1
-    return {
-      next: () => idx > -1
-        ? { value: this.data[idx--], done: false }
-        : { done: true }
-    }
-  }
 }
 
 import { test } from 'ava'
@@ -223,11 +206,9 @@ test('BinarySearchTree#inorder', t => {
     { key: 'b', value: 100 }
   )
 
-  let nodes = Array
-    .from(bst.inorder())
-    .map(n => n.key)
-
-  t.deepEqual(nodes, ['a', 'b', 'c', 'd', 'e'])
+  let values = []
+  bst.inorder(n => { values.push(n.key) })
+  t.deepEqual(values, ['a', 'b', 'c', 'd', 'e'])
 })
 
 test('BinarySearchTree#preorder', t => {
@@ -239,11 +220,9 @@ test('BinarySearchTree#preorder', t => {
     { key: 'b', value: 100 }
   )
 
-  let nodes = Array
-    .from(bst.preorder())
-    .map(n => n.key)
-
-  t.deepEqual(nodes, ['c', 'a', 'b', 'd', 'e'])
+  let values = []
+  bst.preorder(n => { values.push(n.key) })
+  t.deepEqual(values, ['c', 'a', 'b', 'd', 'e'])
 })
 
 test('BinarySearchTree#postorder', t => {
@@ -259,11 +238,9 @@ test('BinarySearchTree#postorder', t => {
     { key: 'h', value: 100 }
   )
 
-  let nodes = Array
-    .from(bst.postorder())
-    .map(n => n.key)
-
-  t.deepEqual(nodes, ['a', 'c', 'e', 'd', 'b', 'h', 'i', 'g', 'f'])
+  let values = []
+  bst.postorder(n => { values.push(n.key) })
+  t.deepEqual(values, ['a', 'c', 'e', 'd', 'b', 'h', 'i', 'g', 'f'])
 })
 
 test('BinarySearchTree#bfs', t => {
@@ -279,9 +256,7 @@ test('BinarySearchTree#bfs', t => {
     { key: 'h', value: 100 }
   )
 
-  let nodes = Array
-    .from(bst.bfs())
-    .map(n => n.key)
-
-  t.deepEqual(nodes, ['f', 'b', 'g', 'a', 'd', 'i', 'c', 'e', 'h'])
+  let values = []
+  bst.bfs(n => { values.push(n.key) })
+  t.deepEqual(values, ['f', 'b', 'g', 'a', 'd', 'i', 'c', 'e', 'h'])
 })

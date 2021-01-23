@@ -24,4 +24,22 @@ The fix is to make sure each call to `setTimeout` has its own instance of `i`, w
 2. Pass `i` to `setTimeout` as its third argument, so `i` is passed in as the argument in `setTimeout`'s callback
 3. Wrap the `setTimeout` in an Immediately-Invoked-Function-Expression and pass `i` into it
 
+4. Using .bind()
+
+Create the function to be called outside the loop. While sending it as a callback, bind it to `null` with an initial argument as  `i`. 
+
+Why does it work? Basically, we are not sending the original function as `setTimeout`'s callback but actually sending the return value from the bind operation, and that return value is the copy of the function. Also, bind allows us to not immediately call the function like .call() or .apply() does. 
+
+Code: 
+
+```js
+
+function display(x){
+  console.log(x)
+}
+for (var i = 0; i < 4; i++) {
+  setTimeout(display.bind(null,i), 0)
+}
+```
+
 I chose option 1 for its minimal code change, and positive effect on readability.

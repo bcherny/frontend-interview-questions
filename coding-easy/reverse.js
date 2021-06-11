@@ -16,6 +16,12 @@ function reverse(string) {
   return result
 }
 
+/// one-liner alternative
+
+function altReverse(str) {
+  return [...str].reduce((acc, curr) => curr + acc, '');
+}
+
 /// tests
 
 import { test } from 'ava'

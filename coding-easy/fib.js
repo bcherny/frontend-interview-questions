@@ -8,6 +8,17 @@ function fib (n) {
   }
 }
 
+function memoize(fn) {
+  const memo = {};
+
+  return function(...args) {
+    if (!memo[args]) memo[args] = fn(...args);
+    return memo[args];
+  }
+}
+
+fib = memoize(fib);
+
 /// tests
 
 import { test } from 'ava'

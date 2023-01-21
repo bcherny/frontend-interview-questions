@@ -6,5 +6,5 @@
 
 This repository contains just answers.
 
-## [See questions here](https://performancejs.com/post/hde6d32/The-Best-Frontend-JavaScript-Interview-Questions-(Written-by-a-Frontend-Engineer))
+## [See questions here](https://borischerny.com/javascript/%22functional/programming%22/2017/06/09/Frontend-Interview-Questions.html)
 

@@ -1,52 +1,23 @@
 /// solution
-
 function isBalanced2(string) {
-  let stack = new Stack
+  let stack = [];
+  let pairs = {'}': '{', ']': '[', ')': '('};
+
   for (let letter of string) {
-    switch (letter) {
+    switch(letter) {
       case '{':
       case '[':
       case '(':
-        stack.push(letter)
-        break
+        stack.push(letter); 
+        break;
       case '}':
       case ']':
       case ')':
-        if (pairOf(stack.peek()) === letter) {
-          stack.pop()
-        } else {
-          return false
-        }
+        if (stack.length === 0 || stack.pop() !== pairs[letter]) return false;
     }
   }
-  return stack.size() === 0
-}
 
-let pairs = {
-  '(': ')',
-  '[': ']',
-  '{': '}'
-}
-function pairOf(letter) {
-  return pairs[letter]
-}
-
-class Stack {
-  constructor() {
-    this.items = []
-  }
-  peek() {
-    return this.items[this.size() - 1]
-  }
-  push(item) {
-    this.items.push(item)
-  }
-  pop() {
-    return this.items.pop()
-  }
-  size() {
-    return this.items.length
-  }
+  return stack.length === 0;
 }
 
 /// tests
